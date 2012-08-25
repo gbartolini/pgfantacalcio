@@ -74,9 +74,18 @@ CREATE TABLE players_teams (
 	round SMALLINT NOT NULL,
 	player_id INTEGER NOT NULL REFERENCES players,
 	role_id INTEGER NOT NULL REFERENCES roles,
+	team_id INTEGER NOT NULL REFERENCES teams,
 	rating SMALLINT,
 	PRIMARY KEY (league_id, season, round, player_id)
 );
+
+CREATE VIEW v_players_teams AS 
+	SELECT l.code AS league, season, round,
+		p.name AS player, r.code AS role, t.name AS team, rating
+		FROM players_teams pt JOIN leagues l ON (pt.league_id = l.id)
+			JOIN players p ON (pt.player_id = p.id)
+			JOIN roles r ON (pt.role_id = r.id)
+			JOIN teams t ON (pt.team_id = t.id);
 
 -- Objects for dump
 SELECT pg_catalog.pg_extension_config_dump('roles', '');
