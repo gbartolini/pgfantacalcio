@@ -87,6 +87,18 @@ CREATE VIEW v_players_teams AS
 			JOIN roles r ON (pt.role_id = r.id)
 			JOIN teams t ON (pt.team_id = t.id);
 
+CREATE VIEW v_matches AS 
+	SELECT l.code AS league, season, round, seq,
+		th.name AS home_team,
+		ta.name AS away_team,
+		kick_off_time,
+		is_played,
+		home_goals,
+		away_goals
+		FROM matches m JOIN leagues l ON (m.league_id = l.id)
+			JOIN teams th ON (m.home_team_id = th.id)
+			JOIN teams ta ON (m.away_team_id = ta.id);
+
 -- Objects for dump
 SELECT pg_catalog.pg_extension_config_dump('roles', '');
 SELECT pg_catalog.pg_extension_config_dump('leagues', '');
