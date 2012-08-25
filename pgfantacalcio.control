@@ -1,0 +1,4 @@
+# pgfantacalcio extension
+comment = 'Fantasy Soccer (Fantacalcio) extension'
+default_version = '1.0'
+relocatable = true
