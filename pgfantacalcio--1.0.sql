@@ -30,8 +30,6 @@ CREATE TABLE roles (
 	code VARCHAR(3) NOT NULL UNIQUE
 );
 
-INSERT INTO roles VALUES (1, 'GK'), (2, 'DEF'), (3, 'MID'), (4, 'ATT');
-
 CREATE TABLE matches (
 	league_id INTEGER NOT NULL REFERENCES leagues,
 	season SMALLINT NOT NULL, -- 2012
@@ -79,3 +77,8 @@ CREATE TABLE players_teams (
 	rating SMALLINT,
 	PRIMARY KEY (league_id, season, round, player_id)
 );
+
+-- Objects for dump
+SELECT pg_catalog.pg_extension_config_dump('roles', '');
+SELECT pg_catalog.pg_extension_config_dump('leagues', '');
+SELECT pg_catalog.pg_extension_config_dump('teams', '');
